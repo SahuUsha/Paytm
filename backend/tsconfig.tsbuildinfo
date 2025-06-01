@@ -1,0 +1,1 @@
+{"root":["./src/index.ts","./src/controller/user.controller.ts","./src/db_connection/dbconnect.ts","./src/models/user.model.ts","./src/router/user.route.ts","./src/utills/apierror.ts","./src/utills/apiresponse.ts"],"version":"5.8.3"}
