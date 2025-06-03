@@ -5,6 +5,7 @@ import ApiResponse from "../utills/apiresponse";
 import  zod, { ParseStatus }  from "zod";
 import jwt from "jsonwebtoken"
 import { JWT_SECRETE } from "../config";
+import { Account } from "../models/account.modal";
 
 
 const signUpSchema =zod.object({
@@ -63,6 +64,11 @@ const UserController =async(req : Request , res : Response , next : NextFunction
         //     userId:createdUser._id,
             
         // },JWT_SECRETE);
+
+        const account = await Account.create({
+            userId: createdUser._id,
+            balance : 1* Math.random() * 10000,
+        })
         
        res.status(201).json(
         new ApiResponse(200,createdUser, "User created successfully")
