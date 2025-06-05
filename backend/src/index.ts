@@ -25,7 +25,9 @@ connectDB()
 
 
 import userRouter from "./router/user.route"
+import bankRouter from "./router/bank.route"
 
 app.use("/api/v1/users",userRouter)
+app.use("/api/v1/bank",bankRouter)
 
 export default app;

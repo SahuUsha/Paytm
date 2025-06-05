@@ -22,6 +22,7 @@ const UserController =async(req : Request , res : Response , next : NextFunction
     // const {username,password,firstName,lastName} = req.body
 
     // console.log(username,password,firstName,lastName)
+    
 
     const body = req.body;
     const {success} = signUpSchema.safeParse(body);
@@ -66,10 +67,11 @@ const UserController =async(req : Request , res : Response , next : NextFunction
         // },JWT_SECRETE);
 
         const account = await Account.create({
-            userId: createdUser._id,
+            userId: createdUser._id.toString(),
             balance : 1* Math.random() * 10000,
         })
-        
+        console.log("account userId : ", account.userId)
+
        res.status(201).json(
         new ApiResponse(200,createdUser, "User created successfully")
     )
@@ -149,7 +151,7 @@ const updateUser = async(req : Request , res: Response , next : NextFunction)=>{
     }
 }
 
-const getSearchUser=async(req : Request , res : Response , next : NextFunction){
+const getSearchUser=async(req : Request , res : Response , next : NextFunction)=>{
 
      const filter = req.query.filter as String || ""
     try{
@@ -183,6 +185,7 @@ const getSearchUser=async(req : Request , res : Response , next : NextFunction){
     }
 
 }
+
 
 
 export { UserController , 
