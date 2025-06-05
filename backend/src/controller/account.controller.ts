@@ -90,11 +90,11 @@ const getUserInfo = async(req: Request , res : Response, next : NextFunction)=>{
 
  try {
     // @ts-ignore
-       const userId = req.user._id;
+       const userId = new mongoose.Types.ObjectId(req.userId as string)
    
        const getUserInfo = await Account.findOne({
            userId : userId
-       })
+       }).populate("userId",("username firstName lastName") )
 
          if(!getUserInfo){
               throw new ApiError(404, "User not found");

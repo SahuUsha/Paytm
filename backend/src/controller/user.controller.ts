@@ -92,10 +92,10 @@ const signinBody = zod.object({
 const signInController=async(req : Request , res : Response , next : NextFunction)=>{
     const body = req.body;
     const {success} = signinBody.safeParse(body);
+    if(!success){
+        throw new ApiError(400, "Invalid input data in sigin" )
+    }
     try {
-        if(!success){
-            throw new ApiError(400, "Invalid input data in sigin" )
-        }
  
         const user = await User.findOne({
             username : body.username,

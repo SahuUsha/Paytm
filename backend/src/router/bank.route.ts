@@ -6,7 +6,7 @@ import { getUserInfo, TransferMoney } from "../controller/account.controller";
 const router = Router();
 
 router.route("/transfer").post(authMiddleware,TransferMoney);
-router.route("/accountInfo").post(authMiddleware,getUserInfo)
+router.route("/accountInfo").get(authMiddleware,getUserInfo)
 
 
 export default router;
