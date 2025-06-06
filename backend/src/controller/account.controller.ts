@@ -109,4 +109,22 @@ const getUserInfo = async(req: Request , res : Response, next : NextFunction)=>{
  }
 }
 
-export {TransferMoney ,getUserInfo}
+const getuserAcoount = async(req : Request , res : Response , next : NextFunction)=>{
+//    @ts-ignore
+    const userId = req.userId
+    try{
+        const user = await Account.findOne({
+         userId : new mongoose.Types.ObjectId(userId as string)
+        }).populate("userId", "username firstName lastName");
+
+        res.status(200).json(
+            new ApiResponse(200, user, "User account retrieved successfully")
+        )
+  }
+      catch(error){
+         console.error("Error in getuserAcoount:", error);
+         throw new ApiError(500, "Error retrieving user account");
+      }  
+}
+
+export {TransferMoney ,getUserInfo , getuserAcoount}
